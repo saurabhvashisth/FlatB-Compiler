@@ -1,0 +1,1686 @@
+Terminals unused in grammar
+
+   LPARAN
+   RPARAN
+   AND
+   OR
+   NOT
+   STRING
+
+
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    2 DECLARATIONS: DECLARATION
+    3             | DECLARATIONS DECLARATION
+
+    4 DECLARATION: INTEGER DECLARATIONLIST ';'
+    5            | ';'
+
+    6 DECLARATIONLIST: VARIABLES
+    7                | DECLARATIONLIST COMMA VARIABLES
+
+    8 VARIABLES: IDENTIFIER
+    9          | IDENTIFIER LBRACKET NUMBER RBRACKET
+
+   10 BLOCK: LBRACE CODESTATEMENTS RBRACE
+   11      | LBRACE RBRACE
+
+   12 CODESTATEMENTS: CODESTATEMENT
+   13               | CODESTATEMENT CODESTATEMENTS
+   14               | LABEL CODESTATEMENTS
+
+   15 CODESTATEMENT: INPUT ';'
+   16              | ASSIGNMENT ';'
+   17              | CONTROL
+   18              | LOOPS
+   19              | OUTPUT ';'
+   20              | ';'
+   21              | GOTOSTATEMENT ';'
+
+   22 INPUT: READ IDENTIFIERLIST
+
+   23 LABEL: IDENTIFIER ':'
+
+   24 ASSIGNMENT: IDS EQ NUMEXP
+
+   25 CONTROL: IF BOOLEXP BLOCK ELSE BLOCK
+   26        | IF BOOLEXP BLOCK
+
+   27 GOTOSTATEMENT: GOTO IDENTIFIER IF BOOLEXP
+   28              | GOTO IDENTIFIER
+
+   29 OUTPUT: PRINT EXPRESSION
+   30       | PRINTLN EXPRESSION
+
+   31 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER BLOCK
+   32      | FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   33      | WHILE BOOLEXP BLOCK
+
+   34 BOOLEXP: NUMEXP NE NUMEXP
+   35        | NUMEXP EQEQ NUMEXP
+   36        | NUMEXP LE NUMEXP
+   37        | NUMEXP LT NUMEXP
+   38        | NUMEXP GT NUMEXP
+   39        | NUMEXP GE NUMEXP
+
+   40 EXPRESSION: NUMEXP
+   41           | EXPRESSION COMMA NUMEXP
+
+   42 NUMEXP: TERM
+   43       | NUMEXP PLUS NUMEXP
+   44       | NUMEXP MINUS NUMEXP
+   45       | NUMEXP MUL NUMEXP
+   46       | NUMEXP DIV NUMEXP
+   47       | NUMEXP MOD NUMEXP
+
+   48 IDENTIFIERLIST: IDS
+   49               | IDENTIFIERLIST COMMA IDS
+
+   50 TERM: IDS
+   51     | NUMBER
+
+   52 IDS: IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+':' (58) 23
+';' (59) 4 5 15 16 19 20 21
+error (256)
+CODEBLOCK (258) 1
+DECLBLOCK (259) 1
+INTEGER (260) 4
+NE (261) 34
+EQ (262) 24 31 32
+EQEQ (263) 35
+LE (264) 36
+LT (265) 37
+GT (266) 38
+GE (267) 39
+LBRACE (268) 1 10 11
+RBRACE (269) 1 10 11
+LBRACKET (270) 9 52
+RBRACKET (271) 9 52
+LPARAN (272)
+RPARAN (273)
+COMMA (274) 7 31 32 41 49
+PLUS (275) 43
+MINUS (276) 44
+MUL (277) 45
+DIV (278) 46
+MOD (279) 47
+FOR (280) 31 32
+WHILE (281) 33
+GOTO (282) 27 28
+IF (283) 25 26 27
+ELSE (284) 25
+AND (285)
+OR (286)
+NOT (287)
+READ (288) 22
+PRINT (289) 29
+PRINTLN (290) 30
+NUMBER (291) 9 31 32 51
+IDENTIFIER (292) 8 9 23 27 28 52 53
+STRING (293)
+
+
+Nonterminals, with rules where they appear
+
+$accept (41)
+    on left: 0
+PROGRAM (42)
+    on left: 1, on right: 0
+DECLARATIONS (43)
+    on left: 2 3, on right: 1 3
+DECLARATION (44)
+    on left: 4 5, on right: 2 3
+DECLARATIONLIST (45)
+    on left: 6 7, on right: 4 7
+VARIABLES (46)
+    on left: 8 9, on right: 6 7
+BLOCK (47)
+    on left: 10 11, on right: 1 25 26 31 32 33
+CODESTATEMENTS (48)
+    on left: 12 13 14, on right: 10 13 14
+CODESTATEMENT (49)
+    on left: 15 16 17 18 19 20 21, on right: 12 13
+INPUT (50)
+    on left: 22, on right: 15
+LABEL (51)
+    on left: 23, on right: 14
+ASSIGNMENT (52)
+    on left: 24, on right: 16
+CONTROL (53)
+    on left: 25 26, on right: 17
+GOTOSTATEMENT (54)
+    on left: 27 28, on right: 21
+OUTPUT (55)
+    on left: 29 30, on right: 19
+LOOPS (56)
+    on left: 31 32 33, on right: 18
+BOOLEXP (57)
+    on left: 34 35 36 37 38 39, on right: 25 26 27 33
+EXPRESSION (58)
+    on left: 40 41, on right: 29 30 41
+NUMEXP (59)
+    on left: 42 43 44 45 46 47, on right: 24 34 35 36 37 38 39 40 41
+    43 44 45 46 47 52
+IDENTIFIERLIST (60)
+    on left: 48 49, on right: 22 49
+TERM (61)
+    on left: 50 51, on right: 42
+IDS (62)
+    on left: 52 53, on right: 24 31 32 48 49 50
+
+
+State 0
+
+    0 $accept: . PROGRAM $end
+    1 PROGRAM: . DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    DECLBLOCK  shift, and go to state 1
+
+    PROGRAM  go to state 2
+
+
+State 1
+
+    1 PROGRAM: DECLBLOCK . LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    LBRACE  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: PROGRAM . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 PROGRAM: DECLBLOCK LBRACE . DECLARATIONS RBRACE CODEBLOCK BLOCK
+    2 DECLARATIONS: . DECLARATION
+    3             | . DECLARATIONS DECLARATION
+    4 DECLARATION: . INTEGER DECLARATIONLIST ';'
+    5            | . ';'
+
+    INTEGER  shift, and go to state 5
+    ';'      shift, and go to state 6
+
+    DECLARATIONS  go to state 7
+    DECLARATION   go to state 8
+
+
+State 4
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+State 5
+
+    4 DECLARATION: INTEGER . DECLARATIONLIST ';'
+    6 DECLARATIONLIST: . VARIABLES
+    7                | . DECLARATIONLIST COMMA VARIABLES
+    8 VARIABLES: . IDENTIFIER
+    9          | . IDENTIFIER LBRACKET NUMBER RBRACKET
+
+    IDENTIFIER  shift, and go to state 9
+
+    DECLARATIONLIST  go to state 10
+    VARIABLES        go to state 11
+
+
+State 6
+
+    5 DECLARATION: ';' .
+
+    $default  reduce using rule 5 (DECLARATION)
+
+
+State 7
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS . RBRACE CODEBLOCK BLOCK
+    3 DECLARATIONS: DECLARATIONS . DECLARATION
+    4 DECLARATION: . INTEGER DECLARATIONLIST ';'
+    5            | . ';'
+
+    INTEGER  shift, and go to state 5
+    RBRACE   shift, and go to state 12
+    ';'      shift, and go to state 6
+
+    DECLARATION  go to state 13
+
+
+State 8
+
+    2 DECLARATIONS: DECLARATION .
+
+    $default  reduce using rule 2 (DECLARATIONS)
+
+
+State 9
+
+    8 VARIABLES: IDENTIFIER .  [COMMA, ';']
+    9          | IDENTIFIER . LBRACKET NUMBER RBRACKET
+
+    LBRACKET  shift, and go to state 14
+
+    $default  reduce using rule 8 (VARIABLES)
+
+
+State 10
+
+    4 DECLARATION: INTEGER DECLARATIONLIST . ';'
+    7 DECLARATIONLIST: DECLARATIONLIST . COMMA VARIABLES
+
+    COMMA  shift, and go to state 15
+    ';'    shift, and go to state 16
+
+
+State 11
+
+    6 DECLARATIONLIST: VARIABLES .
+
+    $default  reduce using rule 6 (DECLARATIONLIST)
+
+
+State 12
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE . CODEBLOCK BLOCK
+
+    CODEBLOCK  shift, and go to state 17
+
+
+State 13
+
+    3 DECLARATIONS: DECLARATIONS DECLARATION .
+
+    $default  reduce using rule 3 (DECLARATIONS)
+
+
+State 14
+
+    9 VARIABLES: IDENTIFIER LBRACKET . NUMBER RBRACKET
+
+    NUMBER  shift, and go to state 18
+
+
+State 15
+
+    7 DECLARATIONLIST: DECLARATIONLIST COMMA . VARIABLES
+    8 VARIABLES: . IDENTIFIER
+    9          | . IDENTIFIER LBRACKET NUMBER RBRACKET
+
+    IDENTIFIER  shift, and go to state 9
+
+    VARIABLES  go to state 19
+
+
+State 16
+
+    4 DECLARATION: INTEGER DECLARATIONLIST ';' .
+
+    $default  reduce using rule 4 (DECLARATION)
+
+
+State 17
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK . BLOCK
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+
+    LBRACE  shift, and go to state 20
+
+    BLOCK  go to state 21
+
+
+State 18
+
+    9 VARIABLES: IDENTIFIER LBRACKET NUMBER . RBRACKET
+
+    RBRACKET  shift, and go to state 22
+
+
+State 19
+
+    7 DECLARATIONLIST: DECLARATIONLIST COMMA VARIABLES .
+
+    $default  reduce using rule 7 (DECLARATIONLIST)
+
+
+State 20
+
+   10 BLOCK: LBRACE . CODESTATEMENTS RBRACE
+   11      | LBRACE . RBRACE
+   12 CODESTATEMENTS: . CODESTATEMENT
+   13               | . CODESTATEMENT CODESTATEMENTS
+   14               | . LABEL CODESTATEMENTS
+   15 CODESTATEMENT: . INPUT ';'
+   16              | . ASSIGNMENT ';'
+   17              | . CONTROL
+   18              | . LOOPS
+   19              | . OUTPUT ';'
+   20              | . ';'
+   21              | . GOTOSTATEMENT ';'
+   22 INPUT: . READ IDENTIFIERLIST
+   23 LABEL: . IDENTIFIER ':'
+   24 ASSIGNMENT: . IDS EQ NUMEXP
+   25 CONTROL: . IF BOOLEXP BLOCK ELSE BLOCK
+   26        | . IF BOOLEXP BLOCK
+   27 GOTOSTATEMENT: . GOTO IDENTIFIER IF BOOLEXP
+   28              | . GOTO IDENTIFIER
+   29 OUTPUT: . PRINT EXPRESSION
+   30       | . PRINTLN EXPRESSION
+   31 LOOPS: . FOR IDS EQ NUMBER COMMA NUMBER BLOCK
+   32      | . FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   33      | . WHILE BOOLEXP BLOCK
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    RBRACE      shift, and go to state 23
+    FOR         shift, and go to state 24
+    WHILE       shift, and go to state 25
+    GOTO        shift, and go to state 26
+    IF          shift, and go to state 27
+    READ        shift, and go to state 28
+    PRINT       shift, and go to state 29
+    PRINTLN     shift, and go to state 30
+    IDENTIFIER  shift, and go to state 31
+    ';'         shift, and go to state 32
+
+    CODESTATEMENTS  go to state 33
+    CODESTATEMENT   go to state 34
+    INPUT           go to state 35
+    LABEL           go to state 36
+    ASSIGNMENT      go to state 37
+    CONTROL         go to state 38
+    GOTOSTATEMENT   go to state 39
+    OUTPUT          go to state 40
+    LOOPS           go to state 41
+    IDS             go to state 42
+
+
+State 21
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK .
+
+    $default  reduce using rule 1 (PROGRAM)
+
+
+State 22
+
+    9 VARIABLES: IDENTIFIER LBRACKET NUMBER RBRACKET .
+
+    $default  reduce using rule 9 (VARIABLES)
+
+
+State 23
+
+   11 BLOCK: LBRACE RBRACE .
+
+    $default  reduce using rule 11 (BLOCK)
+
+
+State 24
+
+   31 LOOPS: FOR . IDS EQ NUMBER COMMA NUMBER BLOCK
+   32      | FOR . IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 43
+
+    IDS  go to state 44
+
+
+State 25
+
+   33 LOOPS: WHILE . BOOLEXP BLOCK
+   34 BOOLEXP: . NUMEXP NE NUMEXP
+   35        | . NUMEXP EQEQ NUMEXP
+   36        | . NUMEXP LE NUMEXP
+   37        | . NUMEXP LT NUMEXP
+   38        | . NUMEXP GT NUMEXP
+   39        | . NUMEXP GE NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    BOOLEXP  go to state 46
+    NUMEXP   go to state 47
+    TERM     go to state 48
+    IDS      go to state 49
+
+
+State 26
+
+   27 GOTOSTATEMENT: GOTO . IDENTIFIER IF BOOLEXP
+   28              | GOTO . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 50
+
+
+State 27
+
+   25 CONTROL: IF . BOOLEXP BLOCK ELSE BLOCK
+   26        | IF . BOOLEXP BLOCK
+   34 BOOLEXP: . NUMEXP NE NUMEXP
+   35        | . NUMEXP EQEQ NUMEXP
+   36        | . NUMEXP LE NUMEXP
+   37        | . NUMEXP LT NUMEXP
+   38        | . NUMEXP GT NUMEXP
+   39        | . NUMEXP GE NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    BOOLEXP  go to state 51
+    NUMEXP   go to state 47
+    TERM     go to state 48
+    IDS      go to state 49
+
+
+State 28
+
+   22 INPUT: READ . IDENTIFIERLIST
+   48 IDENTIFIERLIST: . IDS
+   49               | . IDENTIFIERLIST COMMA IDS
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 43
+
+    IDENTIFIERLIST  go to state 52
+    IDS             go to state 53
+
+
+State 29
+
+   29 OUTPUT: PRINT . EXPRESSION
+   40 EXPRESSION: . NUMEXP
+   41           | . EXPRESSION COMMA NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    EXPRESSION  go to state 54
+    NUMEXP      go to state 55
+    TERM        go to state 48
+    IDS         go to state 49
+
+
+State 30
+
+   30 OUTPUT: PRINTLN . EXPRESSION
+   40 EXPRESSION: . NUMEXP
+   41           | . EXPRESSION COMMA NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    EXPRESSION  go to state 56
+    NUMEXP      go to state 55
+    TERM        go to state 48
+    IDS         go to state 49
+
+
+State 31
+
+   23 LABEL: IDENTIFIER . ':'
+   52 IDS: IDENTIFIER . LBRACKET NUMEXP RBRACKET
+   53    | IDENTIFIER .  [EQ]
+
+    LBRACKET  shift, and go to state 57
+    ':'       shift, and go to state 58
+
+    $default  reduce using rule 53 (IDS)
+
+
+State 32
+
+   20 CODESTATEMENT: ';' .
+
+    $default  reduce using rule 20 (CODESTATEMENT)
+
+
+State 33
+
+   10 BLOCK: LBRACE CODESTATEMENTS . RBRACE
+
+    RBRACE  shift, and go to state 59
+
+
+State 34
+
+   12 CODESTATEMENTS: . CODESTATEMENT
+   12               | CODESTATEMENT .  [RBRACE]
+   13               | . CODESTATEMENT CODESTATEMENTS
+   13               | CODESTATEMENT . CODESTATEMENTS
+   14               | . LABEL CODESTATEMENTS
+   15 CODESTATEMENT: . INPUT ';'
+   16              | . ASSIGNMENT ';'
+   17              | . CONTROL
+   18              | . LOOPS
+   19              | . OUTPUT ';'
+   20              | . ';'
+   21              | . GOTOSTATEMENT ';'
+   22 INPUT: . READ IDENTIFIERLIST
+   23 LABEL: . IDENTIFIER ':'
+   24 ASSIGNMENT: . IDS EQ NUMEXP
+   25 CONTROL: . IF BOOLEXP BLOCK ELSE BLOCK
+   26        | . IF BOOLEXP BLOCK
+   27 GOTOSTATEMENT: . GOTO IDENTIFIER IF BOOLEXP
+   28              | . GOTO IDENTIFIER
+   29 OUTPUT: . PRINT EXPRESSION
+   30       | . PRINTLN EXPRESSION
+   31 LOOPS: . FOR IDS EQ NUMBER COMMA NUMBER BLOCK
+   32      | . FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   33      | . WHILE BOOLEXP BLOCK
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    FOR         shift, and go to state 24
+    WHILE       shift, and go to state 25
+    GOTO        shift, and go to state 26
+    IF          shift, and go to state 27
+    READ        shift, and go to state 28
+    PRINT       shift, and go to state 29
+    PRINTLN     shift, and go to state 30
+    IDENTIFIER  shift, and go to state 31
+    ';'         shift, and go to state 32
+
+    $default  reduce using rule 12 (CODESTATEMENTS)
+
+    CODESTATEMENTS  go to state 60
+    CODESTATEMENT   go to state 34
+    INPUT           go to state 35
+    LABEL           go to state 36
+    ASSIGNMENT      go to state 37
+    CONTROL         go to state 38
+    GOTOSTATEMENT   go to state 39
+    OUTPUT          go to state 40
+    LOOPS           go to state 41
+    IDS             go to state 42
+
+
+State 35
+
+   15 CODESTATEMENT: INPUT . ';'
+
+    ';'  shift, and go to state 61
+
+
+State 36
+
+   12 CODESTATEMENTS: . CODESTATEMENT
+   13               | . CODESTATEMENT CODESTATEMENTS
+   14               | . LABEL CODESTATEMENTS
+   14               | LABEL . CODESTATEMENTS
+   15 CODESTATEMENT: . INPUT ';'
+   16              | . ASSIGNMENT ';'
+   17              | . CONTROL
+   18              | . LOOPS
+   19              | . OUTPUT ';'
+   20              | . ';'
+   21              | . GOTOSTATEMENT ';'
+   22 INPUT: . READ IDENTIFIERLIST
+   23 LABEL: . IDENTIFIER ':'
+   24 ASSIGNMENT: . IDS EQ NUMEXP
+   25 CONTROL: . IF BOOLEXP BLOCK ELSE BLOCK
+   26        | . IF BOOLEXP BLOCK
+   27 GOTOSTATEMENT: . GOTO IDENTIFIER IF BOOLEXP
+   28              | . GOTO IDENTIFIER
+   29 OUTPUT: . PRINT EXPRESSION
+   30       | . PRINTLN EXPRESSION
+   31 LOOPS: . FOR IDS EQ NUMBER COMMA NUMBER BLOCK
+   32      | . FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   33      | . WHILE BOOLEXP BLOCK
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    FOR         shift, and go to state 24
+    WHILE       shift, and go to state 25
+    GOTO        shift, and go to state 26
+    IF          shift, and go to state 27
+    READ        shift, and go to state 28
+    PRINT       shift, and go to state 29
+    PRINTLN     shift, and go to state 30
+    IDENTIFIER  shift, and go to state 31
+    ';'         shift, and go to state 32
+
+    CODESTATEMENTS  go to state 62
+    CODESTATEMENT   go to state 34
+    INPUT           go to state 35
+    LABEL           go to state 36
+    ASSIGNMENT      go to state 37
+    CONTROL         go to state 38
+    GOTOSTATEMENT   go to state 39
+    OUTPUT          go to state 40
+    LOOPS           go to state 41
+    IDS             go to state 42
+
+
+State 37
+
+   16 CODESTATEMENT: ASSIGNMENT . ';'
+
+    ';'  shift, and go to state 63
+
+
+State 38
+
+   17 CODESTATEMENT: CONTROL .
+
+    $default  reduce using rule 17 (CODESTATEMENT)
+
+
+State 39
+
+   21 CODESTATEMENT: GOTOSTATEMENT . ';'
+
+    ';'  shift, and go to state 64
+
+
+State 40
+
+   19 CODESTATEMENT: OUTPUT . ';'
+
+    ';'  shift, and go to state 65
+
+
+State 41
+
+   18 CODESTATEMENT: LOOPS .
+
+    $default  reduce using rule 18 (CODESTATEMENT)
+
+
+State 42
+
+   24 ASSIGNMENT: IDS . EQ NUMEXP
+
+    EQ  shift, and go to state 66
+
+
+State 43
+
+   52 IDS: IDENTIFIER . LBRACKET NUMEXP RBRACKET
+   53    | IDENTIFIER .  [NE, EQ, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+
+    LBRACKET  shift, and go to state 57
+
+    $default  reduce using rule 53 (IDS)
+
+
+State 44
+
+   31 LOOPS: FOR IDS . EQ NUMBER COMMA NUMBER BLOCK
+   32      | FOR IDS . EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+
+    EQ  shift, and go to state 67
+
+
+State 45
+
+   51 TERM: NUMBER .
+
+    $default  reduce using rule 51 (TERM)
+
+
+State 46
+
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+   33 LOOPS: WHILE BOOLEXP . BLOCK
+
+    LBRACE  shift, and go to state 20
+
+    BLOCK  go to state 68
+
+
+State 47
+
+   34 BOOLEXP: NUMEXP . NE NUMEXP
+   35        | NUMEXP . EQEQ NUMEXP
+   36        | NUMEXP . LE NUMEXP
+   37        | NUMEXP . LT NUMEXP
+   38        | NUMEXP . GT NUMEXP
+   39        | NUMEXP . GE NUMEXP
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    NE     shift, and go to state 69
+    EQEQ   shift, and go to state 70
+    LE     shift, and go to state 71
+    LT     shift, and go to state 72
+    GT     shift, and go to state 73
+    GE     shift, and go to state 74
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+
+State 48
+
+   42 NUMEXP: TERM .
+
+    $default  reduce using rule 42 (NUMEXP)
+
+
+State 49
+
+   50 TERM: IDS .
+
+    $default  reduce using rule 50 (TERM)
+
+
+State 50
+
+   27 GOTOSTATEMENT: GOTO IDENTIFIER . IF BOOLEXP
+   28              | GOTO IDENTIFIER .  [';']
+
+    IF  shift, and go to state 80
+
+    $default  reduce using rule 28 (GOTOSTATEMENT)
+
+
+State 51
+
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+   25 CONTROL: IF BOOLEXP . BLOCK ELSE BLOCK
+   26        | IF BOOLEXP . BLOCK
+
+    LBRACE  shift, and go to state 20
+
+    BLOCK  go to state 81
+
+
+State 52
+
+   22 INPUT: READ IDENTIFIERLIST .  [';']
+   49 IDENTIFIERLIST: IDENTIFIERLIST . COMMA IDS
+
+    COMMA  shift, and go to state 82
+
+    $default  reduce using rule 22 (INPUT)
+
+
+State 53
+
+   48 IDENTIFIERLIST: IDS .
+
+    $default  reduce using rule 48 (IDENTIFIERLIST)
+
+
+State 54
+
+   29 OUTPUT: PRINT EXPRESSION .  [';']
+   41 EXPRESSION: EXPRESSION . COMMA NUMEXP
+
+    COMMA  shift, and go to state 83
+
+    $default  reduce using rule 29 (OUTPUT)
+
+
+State 55
+
+   40 EXPRESSION: NUMEXP .  [COMMA, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 40 (EXPRESSION)
+
+
+State 56
+
+   30 OUTPUT: PRINTLN EXPRESSION .  [';']
+   41 EXPRESSION: EXPRESSION . COMMA NUMEXP
+
+    COMMA  shift, and go to state 83
+
+    $default  reduce using rule 30 (OUTPUT)
+
+
+State 57
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   52    | IDENTIFIER LBRACKET . NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 84
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 58
+
+   23 LABEL: IDENTIFIER ':' .
+
+    $default  reduce using rule 23 (LABEL)
+
+
+State 59
+
+   10 BLOCK: LBRACE CODESTATEMENTS RBRACE .
+
+    $default  reduce using rule 10 (BLOCK)
+
+
+State 60
+
+   13 CODESTATEMENTS: CODESTATEMENT CODESTATEMENTS .
+
+    $default  reduce using rule 13 (CODESTATEMENTS)
+
+
+State 61
+
+   15 CODESTATEMENT: INPUT ';' .
+
+    $default  reduce using rule 15 (CODESTATEMENT)
+
+
+State 62
+
+   14 CODESTATEMENTS: LABEL CODESTATEMENTS .
+
+    $default  reduce using rule 14 (CODESTATEMENTS)
+
+
+State 63
+
+   16 CODESTATEMENT: ASSIGNMENT ';' .
+
+    $default  reduce using rule 16 (CODESTATEMENT)
+
+
+State 64
+
+   21 CODESTATEMENT: GOTOSTATEMENT ';' .
+
+    $default  reduce using rule 21 (CODESTATEMENT)
+
+
+State 65
+
+   19 CODESTATEMENT: OUTPUT ';' .
+
+    $default  reduce using rule 19 (CODESTATEMENT)
+
+
+State 66
+
+   24 ASSIGNMENT: IDS EQ . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 85
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 67
+
+   31 LOOPS: FOR IDS EQ . NUMBER COMMA NUMBER BLOCK
+   32      | FOR IDS EQ . NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+
+    NUMBER  shift, and go to state 86
+
+
+State 68
+
+   33 LOOPS: WHILE BOOLEXP BLOCK .
+
+    $default  reduce using rule 33 (LOOPS)
+
+
+State 69
+
+   34 BOOLEXP: NUMEXP NE . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 87
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 70
+
+   35 BOOLEXP: NUMEXP EQEQ . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 88
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 71
+
+   36 BOOLEXP: NUMEXP LE . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 89
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 72
+
+   37 BOOLEXP: NUMEXP LT . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 90
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 73
+
+   38 BOOLEXP: NUMEXP GT . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 91
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 74
+
+   39 BOOLEXP: NUMEXP GE . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 92
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 75
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   43       | NUMEXP PLUS . NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 93
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 76
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   44       | NUMEXP MINUS . NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 94
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 77
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   45       | NUMEXP MUL . NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 95
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 78
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   46       | NUMEXP DIV . NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 96
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 79
+
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   47       | NUMEXP MOD . NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 97
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 80
+
+   27 GOTOSTATEMENT: GOTO IDENTIFIER IF . BOOLEXP
+   34 BOOLEXP: . NUMEXP NE NUMEXP
+   35        | . NUMEXP EQEQ NUMEXP
+   36        | . NUMEXP LE NUMEXP
+   37        | . NUMEXP LT NUMEXP
+   38        | . NUMEXP GT NUMEXP
+   39        | . NUMEXP GE NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    BOOLEXP  go to state 98
+    NUMEXP   go to state 47
+    TERM     go to state 48
+    IDS      go to state 49
+
+
+State 81
+
+   25 CONTROL: IF BOOLEXP BLOCK . ELSE BLOCK
+   26        | IF BOOLEXP BLOCK .  [RBRACE, FOR, WHILE, GOTO, IF, READ, PRINT, PRINTLN, IDENTIFIER, ';']
+
+    ELSE  shift, and go to state 99
+
+    $default  reduce using rule 26 (CONTROL)
+
+
+State 82
+
+   49 IDENTIFIERLIST: IDENTIFIERLIST COMMA . IDS
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 43
+
+    IDS  go to state 100
+
+
+State 83
+
+   41 EXPRESSION: EXPRESSION COMMA . NUMEXP
+   42 NUMEXP: . TERM
+   43       | . NUMEXP PLUS NUMEXP
+   44       | . NUMEXP MINUS NUMEXP
+   45       | . NUMEXP MUL NUMEXP
+   46       | . NUMEXP DIV NUMEXP
+   47       | . NUMEXP MOD NUMEXP
+   50 TERM: . IDS
+   51     | . NUMBER
+   52 IDS: . IDENTIFIER LBRACKET NUMEXP RBRACKET
+   53    | . IDENTIFIER
+
+    NUMBER      shift, and go to state 45
+    IDENTIFIER  shift, and go to state 43
+
+    NUMEXP  go to state 101
+    TERM    go to state 48
+    IDS     go to state 49
+
+
+State 84
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+   52 IDS: IDENTIFIER LBRACKET NUMEXP . RBRACKET
+
+    RBRACKET  shift, and go to state 102
+    PLUS      shift, and go to state 75
+    MINUS     shift, and go to state 76
+    MUL       shift, and go to state 77
+    DIV       shift, and go to state 78
+    MOD       shift, and go to state 79
+
+
+State 85
+
+   24 ASSIGNMENT: IDS EQ NUMEXP .  [';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 24 (ASSIGNMENT)
+
+
+State 86
+
+   31 LOOPS: FOR IDS EQ NUMBER . COMMA NUMBER BLOCK
+   32      | FOR IDS EQ NUMBER . COMMA NUMBER COMMA NUMBER BLOCK
+
+    COMMA  shift, and go to state 103
+
+
+State 87
+
+   34 BOOLEXP: NUMEXP NE NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 34 (BOOLEXP)
+
+
+State 88
+
+   35 BOOLEXP: NUMEXP EQEQ NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 35 (BOOLEXP)
+
+
+State 89
+
+   36 BOOLEXP: NUMEXP LE NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 36 (BOOLEXP)
+
+
+State 90
+
+   37 BOOLEXP: NUMEXP LT NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 37 (BOOLEXP)
+
+
+State 91
+
+   38 BOOLEXP: NUMEXP GT NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 38 (BOOLEXP)
+
+
+State 92
+
+   39 BOOLEXP: NUMEXP GE NUMEXP .  [LBRACE, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 39 (BOOLEXP)
+
+
+State 93
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   43       | NUMEXP PLUS NUMEXP .  [NE, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    $default  reduce using rule 43 (NUMEXP)
+
+    Conflict between rule 43 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 43 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 43 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 43 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 43 and token MOD resolved as reduce (%left MOD).
+
+
+State 94
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   44       | NUMEXP MINUS NUMEXP .  [NE, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    $default  reduce using rule 44 (NUMEXP)
+
+    Conflict between rule 44 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 44 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 44 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 44 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 44 and token MOD resolved as reduce (%left MOD).
+
+
+State 95
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   45       | NUMEXP MUL NUMEXP .  [NE, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    $default  reduce using rule 45 (NUMEXP)
+
+    Conflict between rule 45 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 45 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 45 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 45 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 45 and token MOD resolved as reduce (%left MOD).
+
+
+State 96
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   46       | NUMEXP DIV NUMEXP .  [NE, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+   47       | NUMEXP . MOD NUMEXP
+
+    $default  reduce using rule 46 (NUMEXP)
+
+    Conflict between rule 46 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 46 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 46 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 46 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 46 and token MOD resolved as reduce (%left MOD).
+
+
+State 97
+
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+   47       | NUMEXP MOD NUMEXP .  [NE, EQEQ, LE, LT, GT, GE, LBRACE, RBRACKET, COMMA, PLUS, MINUS, MUL, DIV, MOD, ';']
+
+    $default  reduce using rule 47 (NUMEXP)
+
+    Conflict between rule 47 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 47 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 47 and token MUL resolved as reduce (%left MUL).
+    Conflict between rule 47 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 47 and token MOD resolved as reduce (%left MOD).
+
+
+State 98
+
+   27 GOTOSTATEMENT: GOTO IDENTIFIER IF BOOLEXP .
+
+    $default  reduce using rule 27 (GOTOSTATEMENT)
+
+
+State 99
+
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+   25 CONTROL: IF BOOLEXP BLOCK ELSE . BLOCK
+
+    LBRACE  shift, and go to state 20
+
+    BLOCK  go to state 104
+
+
+State 100
+
+   49 IDENTIFIERLIST: IDENTIFIERLIST COMMA IDS .
+
+    $default  reduce using rule 49 (IDENTIFIERLIST)
+
+
+State 101
+
+   41 EXPRESSION: EXPRESSION COMMA NUMEXP .  [COMMA, ';']
+   43 NUMEXP: NUMEXP . PLUS NUMEXP
+   44       | NUMEXP . MINUS NUMEXP
+   45       | NUMEXP . MUL NUMEXP
+   46       | NUMEXP . DIV NUMEXP
+   47       | NUMEXP . MOD NUMEXP
+
+    PLUS   shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MUL    shift, and go to state 77
+    DIV    shift, and go to state 78
+    MOD    shift, and go to state 79
+
+    $default  reduce using rule 41 (EXPRESSION)
+
+
+State 102
+
+   52 IDS: IDENTIFIER LBRACKET NUMEXP RBRACKET .
+
+    $default  reduce using rule 52 (IDS)
+
+
+State 103
+
+   31 LOOPS: FOR IDS EQ NUMBER COMMA . NUMBER BLOCK
+   32      | FOR IDS EQ NUMBER COMMA . NUMBER COMMA NUMBER BLOCK
+
+    NUMBER  shift, and go to state 105
+
+
+State 104
+
+   25 CONTROL: IF BOOLEXP BLOCK ELSE BLOCK .
+
+    $default  reduce using rule 25 (CONTROL)
+
+
+State 105
+
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+   31 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER . BLOCK
+   32      | FOR IDS EQ NUMBER COMMA NUMBER . COMMA NUMBER BLOCK
+
+    LBRACE  shift, and go to state 20
+    COMMA   shift, and go to state 106
+
+    BLOCK  go to state 107
+
+
+State 106
+
+   32 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER COMMA . NUMBER BLOCK
+
+    NUMBER  shift, and go to state 108
+
+
+State 107
+
+   31 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER BLOCK .
+
+    $default  reduce using rule 31 (LOOPS)
+
+
+State 108
+
+   10 BLOCK: . LBRACE CODESTATEMENTS RBRACE
+   11      | . LBRACE RBRACE
+   32 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER . BLOCK
+
+    LBRACE  shift, and go to state 20
+
+    BLOCK  go to state 109
+
+
+State 109
+
+   32 LOOPS: FOR IDS EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK .
+
+    $default  reduce using rule 32 (LOOPS)

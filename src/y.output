@@ -1,0 +1,2308 @@
+Terminals unused in grammar
+
+   LPARAN
+   RPARAN
+   BITAND
+   BITOR
+   BITXOR
+   LSHIFT
+   RSHIFT
+
+
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    2 DECLARATIONS: DECLARATION
+    3             | DECLARATIONS DECLARATION
+
+    4 DECLARATION: INTEGER DECLARATIONLIST ';'
+    5            | ';'
+
+    6 DECLARATIONLIST: IDENTIFIER LBRACKET NUMBER RBRACKET
+    7                | IDENTIFIER
+    8                | DECLARATIONLIST COMMA IDENTIFIER LBRACKET NUMBER RBRACKET
+    9                | DECLARATIONLIST COMMA IDENTIFIER
+
+   10 BLOCK: LBRACE CODESTATEMENTS RBRACE
+   11      | LBRACE RBRACE
+
+   12 CODESTATEMENTS: CODESTATEMENT
+   13               | CODESTATEMENT CODESTATEMENTS
+
+   14 CODESTATEMENT: INPUT ';'
+   15              | ASSIGNMENT ';'
+   16              | CONTROL
+   17              | OUTPUT ';'
+   18              | LOOPS
+   19              | IDENTIFIER ':'
+   20              | ';'
+
+   21 INPUT: READ IDENTIFIERLIST
+
+   22 BOOLEXP: RELOPS
+   23        | LOGICALOPS
+
+   24 RELOPS: NUMEXP NE NUMEXP
+   25       | NUMEXP EQEQ NUMEXP
+   26       | NUMEXP LE NUMEXP
+   27       | NUMEXP LT NUMEXP
+   28       | NUMEXP GT NUMEXP
+   29       | NUMEXP GE NUMEXP
+
+   30 LOGICALOPS: NUMEXP AND NUMEXP
+   31           | NUMEXP OR NUMEXP
+   32           | NUMEXP NOT NUMEXP
+
+   33 ASSIGNMENT: IDS EQ NUMEXP
+   34           | IDS EQ STRING
+
+   35 CONTROL: IF BOOLEXP BLOCK ELSE BLOCK
+   36        | IF BOOLEXP BLOCK
+
+   37 GOTOSTATEMENT: GOTO IDENTIFIER IF BOOLEXP
+   38              | GOTO IDENTIFIER
+
+   39 OUTPUT: PRINT EXPRESSION
+   40       | PRINTLN EXPRESSION
+
+   41 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER BLOCK
+   42      | FOR IDENTIFIER EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+   43      | WHILE BOOLEXP BLOCK
+   44      | GOTOSTATEMENT ';'
+
+   45 EXPRESSION: NUMEXP
+   46           | STRING
+   47           | EXPRESSION COMMA NUMEXP
+   48           | EXPRESSION COMMA STRING
+
+   49 IDENTIFIERLIST: IDS
+   50               | IDENTIFIERLIST COMMA IDS
+
+   51 IDS: IDENTIFIER LBRACKET NUMEXP RBRACKET
+   52    | IDENTIFIER
+
+   53 NUMEXP: TERM
+   54       | ARITHOPS
+   55       | BITOPS
+
+   56 ARITHOPS: NUMEXP PLUS NUMEXP
+   57         | NUMEXP MINUS NUMEXP
+   58         | NUMEXP MUL NUMEXP
+   59         | NUMEXP DIV NUMEXP
+   60         | NUMEXP MOD NUMEXP
+   61         | NUMEXP PLUSEQ NUMEXP
+   62         | NUMEXP MINUSEQ NUMEXP
+   63         | NUMEXP MULEQ NUMEXP
+   64         | NUMEXP DIVEQ NUMEXP
+   65         | NUMEXP MODEQ NUMEXP
+
+   66 BITOPS: NUMEXP BITANDEQ NUMEXP
+   67       | NUMEXP BITOREQ NUMEXP
+   68       | NUMEXP BITXOREQ NUMEXP
+   69       | NUMEXP LSHIFTEQ NUMEXP
+   70       | NUMEXP RSHIFTEQ NUMEXP
+
+   71 TERM: IDS
+   72     | NUMBER
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+':' (58) 19
+';' (59) 4 5 14 15 17 20 44
+error (256)
+CODEBLOCK (258) 1
+DECLBLOCK (259) 1
+INTEGER (260) 4
+NE (261) 24
+EQ (262) 33 34 41 42
+EQEQ (263) 25
+LE (264) 26
+LT (265) 27
+GT (266) 28
+GE (267) 29
+LBRACE (268) 1 10 11
+RBRACE (269) 1 10 11
+LBRACKET (270) 6 8 51
+RBRACKET (271) 6 8 51
+LPARAN (272)
+RPARAN (273)
+COMMA (274) 8 9 41 42 47 48 50
+PLUS (275) 56
+MINUS (276) 57
+MUL (277) 58
+DIV (278) 59
+MOD (279) 60
+PLUSEQ (280) 61
+MINUSEQ (281) 62
+MULEQ (282) 63
+DIVEQ (283) 64
+MODEQ (284) 65
+BITANDEQ (285) 66
+BITOREQ (286) 67
+BITXOREQ (287) 68
+LSHIFTEQ (288) 69
+RSHIFTEQ (289) 70
+FOR (290) 41 42
+WHILE (291) 43
+GOTO (292) 37 38
+IF (293) 35 36 37
+ELSE (294) 35
+AND (295) 30
+OR (296) 31
+NOT (297) 32
+BITAND (298)
+BITOR (299)
+BITXOR (300)
+LSHIFT (301)
+RSHIFT (302)
+READ (303) 21
+PRINT (304) 39
+PRINTLN (305) 40
+NUMBER (306) 6 8 41 42 72
+IDENTIFIER (307) 6 7 8 9 19 37 38 41 42 51 52
+STRING (308) 34 46 48
+
+
+Nonterminals, with rules where they appear
+
+$accept (56)
+    on left: 0
+PROGRAM (57)
+    on left: 1, on right: 0
+DECLARATIONS (58)
+    on left: 2 3, on right: 1 3
+DECLARATION (59)
+    on left: 4 5, on right: 2 3
+DECLARATIONLIST (60)
+    on left: 6 7 8 9, on right: 4 8 9
+BLOCK (61)
+    on left: 10 11, on right: 1 35 36 41 42 43
+CODESTATEMENTS (62)
+    on left: 12 13, on right: 10 13
+CODESTATEMENT (63)
+    on left: 14 15 16 17 18 19 20, on right: 12 13
+INPUT (64)
+    on left: 21, on right: 14
+BOOLEXP (65)
+    on left: 22 23, on right: 35 36 37 43
+RELOPS (66)
+    on left: 24 25 26 27 28 29, on right: 22
+LOGICALOPS (67)
+    on left: 30 31 32, on right: 23
+ASSIGNMENT (68)
+    on left: 33 34, on right: 15
+CONTROL (69)
+    on left: 35 36, on right: 16
+GOTOSTATEMENT (70)
+    on left: 37 38, on right: 44
+OUTPUT (71)
+    on left: 39 40, on right: 17
+LOOPS (72)
+    on left: 41 42 43 44, on right: 18
+EXPRESSION (73)
+    on left: 45 46 47 48, on right: 39 40 47 48
+IDENTIFIERLIST (74)
+    on left: 49 50, on right: 21 50
+IDS (75)
+    on left: 51 52, on right: 33 34 49 50 71
+NUMEXP (76)
+    on left: 53 54 55, on right: 24 25 26 27 28 29 30 31 32 33 45 47
+    51 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
+ARITHOPS (77)
+    on left: 56 57 58 59 60 61 62 63 64 65, on right: 54
+BITOPS (78)
+    on left: 66 67 68 69 70, on right: 55
+TERM (79)
+    on left: 71 72, on right: 53
+
+
+State 0
+
+    0 $accept: . PROGRAM $end
+
+    DECLBLOCK  shift, and go to state 1
+
+    PROGRAM  go to state 2
+
+
+State 1
+
+    1 PROGRAM: DECLBLOCK . LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    LBRACE  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: PROGRAM . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 PROGRAM: DECLBLOCK LBRACE . DECLARATIONS RBRACE CODEBLOCK BLOCK
+
+    INTEGER  shift, and go to state 5
+    ';'      shift, and go to state 6
+
+    DECLARATIONS  go to state 7
+    DECLARATION   go to state 8
+
+
+State 4
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+State 5
+
+    4 DECLARATION: INTEGER . DECLARATIONLIST ';'
+
+    IDENTIFIER  shift, and go to state 9
+
+    DECLARATIONLIST  go to state 10
+
+
+State 6
+
+    5 DECLARATION: ';' .
+
+    $default  reduce using rule 5 (DECLARATION)
+
+
+State 7
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS . RBRACE CODEBLOCK BLOCK
+    3 DECLARATIONS: DECLARATIONS . DECLARATION
+
+    INTEGER  shift, and go to state 5
+    RBRACE   shift, and go to state 11
+    ';'      shift, and go to state 6
+
+    DECLARATION  go to state 12
+
+
+State 8
+
+    2 DECLARATIONS: DECLARATION .
+
+    $default  reduce using rule 2 (DECLARATIONS)
+
+
+State 9
+
+    6 DECLARATIONLIST: IDENTIFIER . LBRACKET NUMBER RBRACKET
+    7                | IDENTIFIER .
+
+    LBRACKET  shift, and go to state 13
+
+    $default  reduce using rule 7 (DECLARATIONLIST)
+
+
+State 10
+
+    4 DECLARATION: INTEGER DECLARATIONLIST . ';'
+    8 DECLARATIONLIST: DECLARATIONLIST . COMMA IDENTIFIER LBRACKET NUMBER RBRACKET
+    9                | DECLARATIONLIST . COMMA IDENTIFIER
+
+    COMMA  shift, and go to state 14
+    ';'    shift, and go to state 15
+
+
+State 11
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE . CODEBLOCK BLOCK
+
+    CODEBLOCK  shift, and go to state 16
+
+
+State 12
+
+    3 DECLARATIONS: DECLARATIONS DECLARATION .
+
+    $default  reduce using rule 3 (DECLARATIONS)
+
+
+State 13
+
+    6 DECLARATIONLIST: IDENTIFIER LBRACKET . NUMBER RBRACKET
+
+    NUMBER  shift, and go to state 17
+
+
+State 14
+
+    8 DECLARATIONLIST: DECLARATIONLIST COMMA . IDENTIFIER LBRACKET NUMBER RBRACKET
+    9                | DECLARATIONLIST COMMA . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 18
+
+
+State 15
+
+    4 DECLARATION: INTEGER DECLARATIONLIST ';' .
+
+    $default  reduce using rule 4 (DECLARATION)
+
+
+State 16
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK . BLOCK
+
+    LBRACE  shift, and go to state 19
+
+    BLOCK  go to state 20
+
+
+State 17
+
+    6 DECLARATIONLIST: IDENTIFIER LBRACKET NUMBER . RBRACKET
+
+    RBRACKET  shift, and go to state 21
+
+
+State 18
+
+    8 DECLARATIONLIST: DECLARATIONLIST COMMA IDENTIFIER . LBRACKET NUMBER RBRACKET
+    9                | DECLARATIONLIST COMMA IDENTIFIER .
+
+    LBRACKET  shift, and go to state 22
+
+    $default  reduce using rule 9 (DECLARATIONLIST)
+
+
+State 19
+
+   10 BLOCK: LBRACE . CODESTATEMENTS RBRACE
+   11      | LBRACE . RBRACE
+
+    RBRACE      shift, and go to state 23
+    FOR         shift, and go to state 24
+    WHILE       shift, and go to state 25
+    GOTO        shift, and go to state 26
+    IF          shift, and go to state 27
+    READ        shift, and go to state 28
+    PRINT       shift, and go to state 29
+    PRINTLN     shift, and go to state 30
+    IDENTIFIER  shift, and go to state 31
+    ';'         shift, and go to state 32
+
+    CODESTATEMENTS  go to state 33
+    CODESTATEMENT   go to state 34
+    INPUT           go to state 35
+    ASSIGNMENT      go to state 36
+    CONTROL         go to state 37
+    GOTOSTATEMENT   go to state 38
+    OUTPUT          go to state 39
+    LOOPS           go to state 40
+    IDS             go to state 41
+
+
+State 20
+
+    1 PROGRAM: DECLBLOCK LBRACE DECLARATIONS RBRACE CODEBLOCK BLOCK .
+
+    $default  reduce using rule 1 (PROGRAM)
+
+
+State 21
+
+    6 DECLARATIONLIST: IDENTIFIER LBRACKET NUMBER RBRACKET .
+
+    $default  reduce using rule 6 (DECLARATIONLIST)
+
+
+State 22
+
+    8 DECLARATIONLIST: DECLARATIONLIST COMMA IDENTIFIER LBRACKET . NUMBER RBRACKET
+
+    NUMBER  shift, and go to state 42
+
+
+State 23
+
+   11 BLOCK: LBRACE RBRACE .
+
+    $default  reduce using rule 11 (BLOCK)
+
+
+State 24
+
+   41 LOOPS: FOR . IDENTIFIER EQ NUMBER COMMA NUMBER BLOCK
+   42      | FOR . IDENTIFIER EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+
+    IDENTIFIER  shift, and go to state 43
+
+
+State 25
+
+   43 LOOPS: WHILE . BOOLEXP BLOCK
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    BOOLEXP     go to state 46
+    RELOPS      go to state 47
+    LOGICALOPS  go to state 48
+    IDS         go to state 49
+    NUMEXP      go to state 50
+    ARITHOPS    go to state 51
+    BITOPS      go to state 52
+    TERM        go to state 53
+
+
+State 26
+
+   37 GOTOSTATEMENT: GOTO . IDENTIFIER IF BOOLEXP
+   38              | GOTO . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 54
+
+
+State 27
+
+   35 CONTROL: IF . BOOLEXP BLOCK ELSE BLOCK
+   36        | IF . BOOLEXP BLOCK
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    BOOLEXP     go to state 55
+    RELOPS      go to state 47
+    LOGICALOPS  go to state 48
+    IDS         go to state 49
+    NUMEXP      go to state 50
+    ARITHOPS    go to state 51
+    BITOPS      go to state 52
+    TERM        go to state 53
+
+
+State 28
+
+   21 INPUT: READ . IDENTIFIERLIST
+
+    IDENTIFIER  shift, and go to state 45
+
+    IDENTIFIERLIST  go to state 56
+    IDS             go to state 57
+
+
+State 29
+
+   39 OUTPUT: PRINT . EXPRESSION
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 58
+
+    EXPRESSION  go to state 59
+    IDS         go to state 49
+    NUMEXP      go to state 60
+    ARITHOPS    go to state 51
+    BITOPS      go to state 52
+    TERM        go to state 53
+
+
+State 30
+
+   40 OUTPUT: PRINTLN . EXPRESSION
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 58
+
+    EXPRESSION  go to state 61
+    IDS         go to state 49
+    NUMEXP      go to state 60
+    ARITHOPS    go to state 51
+    BITOPS      go to state 52
+    TERM        go to state 53
+
+
+State 31
+
+   19 CODESTATEMENT: IDENTIFIER . ':'
+   51 IDS: IDENTIFIER . LBRACKET NUMEXP RBRACKET
+   52    | IDENTIFIER .
+
+    LBRACKET  shift, and go to state 62
+    ':'       shift, and go to state 63
+
+    $default  reduce using rule 52 (IDS)
+
+
+State 32
+
+   20 CODESTATEMENT: ';' .
+
+    $default  reduce using rule 20 (CODESTATEMENT)
+
+
+State 33
+
+   10 BLOCK: LBRACE CODESTATEMENTS . RBRACE
+
+    RBRACE  shift, and go to state 64
+
+
+State 34
+
+   12 CODESTATEMENTS: CODESTATEMENT .
+   13               | CODESTATEMENT . CODESTATEMENTS
+
+    FOR         shift, and go to state 24
+    WHILE       shift, and go to state 25
+    GOTO        shift, and go to state 26
+    IF          shift, and go to state 27
+    READ        shift, and go to state 28
+    PRINT       shift, and go to state 29
+    PRINTLN     shift, and go to state 30
+    IDENTIFIER  shift, and go to state 31
+    ';'         shift, and go to state 32
+
+    $default  reduce using rule 12 (CODESTATEMENTS)
+
+    CODESTATEMENTS  go to state 65
+    CODESTATEMENT   go to state 34
+    INPUT           go to state 35
+    ASSIGNMENT      go to state 36
+    CONTROL         go to state 37
+    GOTOSTATEMENT   go to state 38
+    OUTPUT          go to state 39
+    LOOPS           go to state 40
+    IDS             go to state 41
+
+
+State 35
+
+   14 CODESTATEMENT: INPUT . ';'
+
+    ';'  shift, and go to state 66
+
+
+State 36
+
+   15 CODESTATEMENT: ASSIGNMENT . ';'
+
+    ';'  shift, and go to state 67
+
+
+State 37
+
+   16 CODESTATEMENT: CONTROL .
+
+    $default  reduce using rule 16 (CODESTATEMENT)
+
+
+State 38
+
+   44 LOOPS: GOTOSTATEMENT . ';'
+
+    ';'  shift, and go to state 68
+
+
+State 39
+
+   17 CODESTATEMENT: OUTPUT . ';'
+
+    ';'  shift, and go to state 69
+
+
+State 40
+
+   18 CODESTATEMENT: LOOPS .
+
+    $default  reduce using rule 18 (CODESTATEMENT)
+
+
+State 41
+
+   33 ASSIGNMENT: IDS . EQ NUMEXP
+   34           | IDS . EQ STRING
+
+    EQ  shift, and go to state 70
+
+
+State 42
+
+    8 DECLARATIONLIST: DECLARATIONLIST COMMA IDENTIFIER LBRACKET NUMBER . RBRACKET
+
+    RBRACKET  shift, and go to state 71
+
+
+State 43
+
+   41 LOOPS: FOR IDENTIFIER . EQ NUMBER COMMA NUMBER BLOCK
+   42      | FOR IDENTIFIER . EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+
+    EQ  shift, and go to state 72
+
+
+State 44
+
+   72 TERM: NUMBER .
+
+    $default  reduce using rule 72 (TERM)
+
+
+State 45
+
+   51 IDS: IDENTIFIER . LBRACKET NUMEXP RBRACKET
+   52    | IDENTIFIER .
+
+    LBRACKET  shift, and go to state 62
+
+    $default  reduce using rule 52 (IDS)
+
+
+State 46
+
+   43 LOOPS: WHILE BOOLEXP . BLOCK
+
+    LBRACE  shift, and go to state 19
+
+    BLOCK  go to state 73
+
+
+State 47
+
+   22 BOOLEXP: RELOPS .
+
+    $default  reduce using rule 22 (BOOLEXP)
+
+
+State 48
+
+   23 BOOLEXP: LOGICALOPS .
+
+    $default  reduce using rule 23 (BOOLEXP)
+
+
+State 49
+
+   71 TERM: IDS .
+
+    $default  reduce using rule 71 (TERM)
+
+
+State 50
+
+   24 RELOPS: NUMEXP . NE NUMEXP
+   25       | NUMEXP . EQEQ NUMEXP
+   26       | NUMEXP . LE NUMEXP
+   27       | NUMEXP . LT NUMEXP
+   28       | NUMEXP . GT NUMEXP
+   29       | NUMEXP . GE NUMEXP
+   30 LOGICALOPS: NUMEXP . AND NUMEXP
+   31           | NUMEXP . OR NUMEXP
+   32           | NUMEXP . NOT NUMEXP
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    NE        shift, and go to state 74
+    EQEQ      shift, and go to state 75
+    LE        shift, and go to state 76
+    LT        shift, and go to state 77
+    GT        shift, and go to state 78
+    GE        shift, and go to state 79
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+    AND       shift, and go to state 95
+    OR        shift, and go to state 96
+    NOT       shift, and go to state 97
+
+
+State 51
+
+   54 NUMEXP: ARITHOPS .
+
+    $default  reduce using rule 54 (NUMEXP)
+
+
+State 52
+
+   55 NUMEXP: BITOPS .
+
+    $default  reduce using rule 55 (NUMEXP)
+
+
+State 53
+
+   53 NUMEXP: TERM .
+
+    $default  reduce using rule 53 (NUMEXP)
+
+
+State 54
+
+   37 GOTOSTATEMENT: GOTO IDENTIFIER . IF BOOLEXP
+   38              | GOTO IDENTIFIER .
+
+    IF  shift, and go to state 98
+
+    $default  reduce using rule 38 (GOTOSTATEMENT)
+
+
+State 55
+
+   35 CONTROL: IF BOOLEXP . BLOCK ELSE BLOCK
+   36        | IF BOOLEXP . BLOCK
+
+    LBRACE  shift, and go to state 19
+
+    BLOCK  go to state 99
+
+
+State 56
+
+   21 INPUT: READ IDENTIFIERLIST .
+   50 IDENTIFIERLIST: IDENTIFIERLIST . COMMA IDS
+
+    COMMA  shift, and go to state 100
+
+    $default  reduce using rule 21 (INPUT)
+
+
+State 57
+
+   49 IDENTIFIERLIST: IDS .
+
+    $default  reduce using rule 49 (IDENTIFIERLIST)
+
+
+State 58
+
+   46 EXPRESSION: STRING .
+
+    $default  reduce using rule 46 (EXPRESSION)
+
+
+State 59
+
+   39 OUTPUT: PRINT EXPRESSION .
+   47 EXPRESSION: EXPRESSION . COMMA NUMEXP
+   48           | EXPRESSION . COMMA STRING
+
+    COMMA  shift, and go to state 101
+
+    $default  reduce using rule 39 (OUTPUT)
+
+
+State 60
+
+   45 EXPRESSION: NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 45 (EXPRESSION)
+
+
+State 61
+
+   40 OUTPUT: PRINTLN EXPRESSION .
+   47 EXPRESSION: EXPRESSION . COMMA NUMEXP
+   48           | EXPRESSION . COMMA STRING
+
+    COMMA  shift, and go to state 101
+
+    $default  reduce using rule 40 (OUTPUT)
+
+
+State 62
+
+   51 IDS: IDENTIFIER LBRACKET . NUMEXP RBRACKET
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 102
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 63
+
+   19 CODESTATEMENT: IDENTIFIER ':' .
+
+    $default  reduce using rule 19 (CODESTATEMENT)
+
+
+State 64
+
+   10 BLOCK: LBRACE CODESTATEMENTS RBRACE .
+
+    $default  reduce using rule 10 (BLOCK)
+
+
+State 65
+
+   13 CODESTATEMENTS: CODESTATEMENT CODESTATEMENTS .
+
+    $default  reduce using rule 13 (CODESTATEMENTS)
+
+
+State 66
+
+   14 CODESTATEMENT: INPUT ';' .
+
+    $default  reduce using rule 14 (CODESTATEMENT)
+
+
+State 67
+
+   15 CODESTATEMENT: ASSIGNMENT ';' .
+
+    $default  reduce using rule 15 (CODESTATEMENT)
+
+
+State 68
+
+   44 LOOPS: GOTOSTATEMENT ';' .
+
+    $default  reduce using rule 44 (LOOPS)
+
+
+State 69
+
+   17 CODESTATEMENT: OUTPUT ';' .
+
+    $default  reduce using rule 17 (CODESTATEMENT)
+
+
+State 70
+
+   33 ASSIGNMENT: IDS EQ . NUMEXP
+   34           | IDS EQ . STRING
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 103
+
+    IDS       go to state 49
+    NUMEXP    go to state 104
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 71
+
+    8 DECLARATIONLIST: DECLARATIONLIST COMMA IDENTIFIER LBRACKET NUMBER RBRACKET .
+
+    $default  reduce using rule 8 (DECLARATIONLIST)
+
+
+State 72
+
+   41 LOOPS: FOR IDENTIFIER EQ . NUMBER COMMA NUMBER BLOCK
+   42      | FOR IDENTIFIER EQ . NUMBER COMMA NUMBER COMMA NUMBER BLOCK
+
+    NUMBER  shift, and go to state 105
+
+
+State 73
+
+   43 LOOPS: WHILE BOOLEXP BLOCK .
+
+    $default  reduce using rule 43 (LOOPS)
+
+
+State 74
+
+   24 RELOPS: NUMEXP NE . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 106
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 75
+
+   25 RELOPS: NUMEXP EQEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 107
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 76
+
+   26 RELOPS: NUMEXP LE . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 108
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 77
+
+   27 RELOPS: NUMEXP LT . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 109
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 78
+
+   28 RELOPS: NUMEXP GT . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 110
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 79
+
+   29 RELOPS: NUMEXP GE . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 111
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 80
+
+   56 ARITHOPS: NUMEXP PLUS . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 112
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 81
+
+   57 ARITHOPS: NUMEXP MINUS . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 113
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 82
+
+   58 ARITHOPS: NUMEXP MUL . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 114
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 83
+
+   59 ARITHOPS: NUMEXP DIV . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 115
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 84
+
+   60 ARITHOPS: NUMEXP MOD . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 116
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 85
+
+   61 ARITHOPS: NUMEXP PLUSEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 117
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 86
+
+   62 ARITHOPS: NUMEXP MINUSEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 118
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 87
+
+   63 ARITHOPS: NUMEXP MULEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 119
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 88
+
+   64 ARITHOPS: NUMEXP DIVEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 120
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 89
+
+   65 ARITHOPS: NUMEXP MODEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 121
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 90
+
+   66 BITOPS: NUMEXP BITANDEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 122
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 91
+
+   67 BITOPS: NUMEXP BITOREQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 123
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 92
+
+   68 BITOPS: NUMEXP BITXOREQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 124
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 93
+
+   69 BITOPS: NUMEXP LSHIFTEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 125
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 94
+
+   70 BITOPS: NUMEXP RSHIFTEQ . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 126
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 95
+
+   30 LOGICALOPS: NUMEXP AND . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 127
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 96
+
+   31 LOGICALOPS: NUMEXP OR . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 128
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 97
+
+   32 LOGICALOPS: NUMEXP NOT . NUMEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    IDS       go to state 49
+    NUMEXP    go to state 129
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 98
+
+   37 GOTOSTATEMENT: GOTO IDENTIFIER IF . BOOLEXP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+
+    BOOLEXP     go to state 130
+    RELOPS      go to state 47
+    LOGICALOPS  go to state 48
+    IDS         go to state 49
+    NUMEXP      go to state 50
+    ARITHOPS    go to state 51
+    BITOPS      go to state 52
+    TERM        go to state 53
+
+
+State 99
+
+   35 CONTROL: IF BOOLEXP BLOCK . ELSE BLOCK
+   36        | IF BOOLEXP BLOCK .
+
+    ELSE  shift, and go to state 131
+
+    $default  reduce using rule 36 (CONTROL)
+
+
+State 100
+
+   50 IDENTIFIERLIST: IDENTIFIERLIST COMMA . IDS
+
+    IDENTIFIER  shift, and go to state 45
+
+    IDS  go to state 132
+
+
+State 101
+
+   47 EXPRESSION: EXPRESSION COMMA . NUMEXP
+   48           | EXPRESSION COMMA . STRING
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 133
+
+    IDS       go to state 49
+    NUMEXP    go to state 134
+    ARITHOPS  go to state 51
+    BITOPS    go to state 52
+    TERM      go to state 53
+
+
+State 102
+
+   51 IDS: IDENTIFIER LBRACKET NUMEXP . RBRACKET
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    RBRACKET  shift, and go to state 135
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+
+State 103
+
+   34 ASSIGNMENT: IDS EQ STRING .
+
+    $default  reduce using rule 34 (ASSIGNMENT)
+
+
+State 104
+
+   33 ASSIGNMENT: IDS EQ NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 33 (ASSIGNMENT)
+
+
+State 105
+
+   41 LOOPS: FOR IDENTIFIER EQ NUMBER . COMMA NUMBER BLOCK
+   42      | FOR IDENTIFIER EQ NUMBER . COMMA NUMBER COMMA NUMBER BLOCK
+
+    COMMA  shift, and go to state 136
+
+
+State 106
+
+   24 RELOPS: NUMEXP NE NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 24 (RELOPS)
+
+
+State 107
+
+   25 RELOPS: NUMEXP EQEQ NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 25 (RELOPS)
+
+
+State 108
+
+   26 RELOPS: NUMEXP LE NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 26 (RELOPS)
+
+
+State 109
+
+   27 RELOPS: NUMEXP LT NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 27 (RELOPS)
+
+
+State 110
+
+   28 RELOPS: NUMEXP GT NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 28 (RELOPS)
+
+
+State 111
+
+   29 RELOPS: NUMEXP GE NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 29 (RELOPS)
+
+
+State 112
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   56         | NUMEXP PLUS NUMEXP .
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 56 (ARITHOPS)
+
+
+State 113
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   57         | NUMEXP MINUS NUMEXP .
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 57 (ARITHOPS)
+
+
+State 114
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   58         | NUMEXP MUL NUMEXP .
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 58 (ARITHOPS)
+
+
+State 115
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   59         | NUMEXP DIV NUMEXP .
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 59 (ARITHOPS)
+
+
+State 116
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   60         | NUMEXP MOD NUMEXP .
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 60 (ARITHOPS)
+
+
+State 117
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   61         | NUMEXP PLUSEQ NUMEXP .
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 61 (ARITHOPS)
+
+
+State 118
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   62         | NUMEXP MINUSEQ NUMEXP .
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 62 (ARITHOPS)
+
+
+State 119
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   63         | NUMEXP MULEQ NUMEXP .
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 63 (ARITHOPS)
+
+
+State 120
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   64         | NUMEXP DIVEQ NUMEXP .
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 64 (ARITHOPS)
+
+
+State 121
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   65         | NUMEXP MODEQ NUMEXP .
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 65 (ARITHOPS)
+
+
+State 122
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   66       | NUMEXP BITANDEQ NUMEXP .
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 66 (BITOPS)
+
+
+State 123
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   67       | NUMEXP BITOREQ NUMEXP .
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 67 (BITOPS)
+
+
+State 124
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   68       | NUMEXP BITXOREQ NUMEXP .
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 68 (BITOPS)
+
+
+State 125
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   69       | NUMEXP LSHIFTEQ NUMEXP .
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    $default  reduce using rule 69 (BITOPS)
+
+
+State 126
+
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+   70       | NUMEXP RSHIFTEQ NUMEXP .
+
+    $default  reduce using rule 70 (BITOPS)
+
+
+State 127
+
+   30 LOGICALOPS: NUMEXP AND NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 30 (LOGICALOPS)
+
+
+State 128
+
+   31 LOGICALOPS: NUMEXP OR NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 31 (LOGICALOPS)
+
+
+State 129
+
+   32 LOGICALOPS: NUMEXP NOT NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 32 (LOGICALOPS)
+
+
+State 130
+
+   37 GOTOSTATEMENT: GOTO IDENTIFIER IF BOOLEXP .
+
+    $default  reduce using rule 37 (GOTOSTATEMENT)
+
+
+State 131
+
+   35 CONTROL: IF BOOLEXP BLOCK ELSE . BLOCK
+
+    LBRACE  shift, and go to state 19
+
+    BLOCK  go to state 137
+
+
+State 132
+
+   50 IDENTIFIERLIST: IDENTIFIERLIST COMMA IDS .
+
+    $default  reduce using rule 50 (IDENTIFIERLIST)
+
+
+State 133
+
+   48 EXPRESSION: EXPRESSION COMMA STRING .
+
+    $default  reduce using rule 48 (EXPRESSION)
+
+
+State 134
+
+   47 EXPRESSION: EXPRESSION COMMA NUMEXP .
+   56 ARITHOPS: NUMEXP . PLUS NUMEXP
+   57         | NUMEXP . MINUS NUMEXP
+   58         | NUMEXP . MUL NUMEXP
+   59         | NUMEXP . DIV NUMEXP
+   60         | NUMEXP . MOD NUMEXP
+   61         | NUMEXP . PLUSEQ NUMEXP
+   62         | NUMEXP . MINUSEQ NUMEXP
+   63         | NUMEXP . MULEQ NUMEXP
+   64         | NUMEXP . DIVEQ NUMEXP
+   65         | NUMEXP . MODEQ NUMEXP
+   66 BITOPS: NUMEXP . BITANDEQ NUMEXP
+   67       | NUMEXP . BITOREQ NUMEXP
+   68       | NUMEXP . BITXOREQ NUMEXP
+   69       | NUMEXP . LSHIFTEQ NUMEXP
+   70       | NUMEXP . RSHIFTEQ NUMEXP
+
+    PLUS      shift, and go to state 80
+    MINUS     shift, and go to state 81
+    MUL       shift, and go to state 82
+    DIV       shift, and go to state 83
+    MOD       shift, and go to state 84
+    PLUSEQ    shift, and go to state 85
+    MINUSEQ   shift, and go to state 86
+    MULEQ     shift, and go to state 87
+    DIVEQ     shift, and go to state 88
+    MODEQ     shift, and go to state 89
+    BITANDEQ  shift, and go to state 90
+    BITOREQ   shift, and go to state 91
+    BITXOREQ  shift, and go to state 92
+    LSHIFTEQ  shift, and go to state 93
+    RSHIFTEQ  shift, and go to state 94
+
+    $default  reduce using rule 47 (EXPRESSION)
+
+
+State 135
+
+   51 IDS: IDENTIFIER LBRACKET NUMEXP RBRACKET .
+
+    $default  reduce using rule 51 (IDS)
+
+
+State 136
+
+   41 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA . NUMBER BLOCK
+   42      | FOR IDENTIFIER EQ NUMBER COMMA . NUMBER COMMA NUMBER BLOCK
+
+    NUMBER  shift, and go to state 138
+
+
+State 137
+
+   35 CONTROL: IF BOOLEXP BLOCK ELSE BLOCK .
+
+    $default  reduce using rule 35 (CONTROL)
+
+
+State 138
+
+   41 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER . BLOCK
+   42      | FOR IDENTIFIER EQ NUMBER COMMA NUMBER . COMMA NUMBER BLOCK
+
+    LBRACE  shift, and go to state 19
+    COMMA   shift, and go to state 139
+
+    BLOCK  go to state 140
+
+
+State 139
+
+   42 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER COMMA . NUMBER BLOCK
+
+    NUMBER  shift, and go to state 141
+
+
+State 140
+
+   41 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER BLOCK .
+
+    $default  reduce using rule 41 (LOOPS)
+
+
+State 141
+
+   42 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER COMMA NUMBER . BLOCK
+
+    LBRACE  shift, and go to state 19
+
+    BLOCK  go to state 142
+
+
+State 142
+
+   42 LOOPS: FOR IDENTIFIER EQ NUMBER COMMA NUMBER COMMA NUMBER BLOCK .
+
+    $default  reduce using rule 42 (LOOPS)
